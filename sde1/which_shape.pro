@@ -46,3 +46,10 @@ sqA --> uA(L),rA(L),dA(L),lA(L).
 %% check if it is rect.
 rctA --> uA(W),rA(H),dA(W),lA(H).
 
+%%3.6 grect/3
+%% generate a rectangle.
+grect(HEIGHT,WIDTH,What) :- 
+                         uA(HEIGHT,[H|_],[]),
+                         name(W,H),
+                         writeq(W).
+
