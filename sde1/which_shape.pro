@@ -40,5 +40,9 @@ l  --> ["l"],[].
 
 %% sqA/2.
 %% check if it is u^n r^n d^n l^n (Real Sqr).
-
 sqA --> uA(L),rA(L),dA(L),lA(L).
+
+%%3.5 rctA/2.
+%% check if it is rect.
+rctA --> uA(W),rA(H),dA(W),lA(H).
+
