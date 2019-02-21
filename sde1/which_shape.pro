@@ -74,29 +74,41 @@ eqtriA --> uA(L),m30A(L),p240A(L).
 
 %%4.1 one_shift/2
 %%left shift 1 digit.
-one_shift([Ori_H | Ori_T],New_list) :- append(Ori_T,[Ori_H],New_list).
-                                   
+one_shift([Ori_H | Ori_T],New_list) :- append(Ori_T,[Ori_H],New_list).                                 
 
-
-								   
-								   
+%%add_case([],X,[X]).
+%%add_case([H|T],X,[H|L]) :- add_case(T,X,L).
+add_case(List1,List2,Cases):- append(List1,[List2],Cases).							   
 %%4.2 all_shifts/4
 %% shift all case for length-1. (length-1>0)
-%%located_list([H|T],Start_pos,Opt_pos) :- H is Start_pos,!.
-%%located_list([_|T],Start_pos,Opt_pos) :-
-%%    New_Opt_pos is Opt_pos + 1,
-%%	located_list(T,Start_pos,New_Opt_pos).
-   
-                            
-                             
 
+shifts(_,New_case,Lens):- Lens =:= 1,writeq(New_case),!.
+shifts([H|T],All_case,Lens):-  
+	New_Lens is Lens - 1,
+	one_shift([H|T],New_list),
+    add_case(All_case,New_list,New_case),
+	shifts(New_list,New_case,New_Lens).
+                    
+					
+all_shifts(_, All_case,Lens,_) :-  Lens =:= 1, !.
 all_shifts([H|T],All_case,Lens,Start_pos) :- 
 	H =:= Start_pos, 
-	writeq([H|T]),
-	!.
-all_shifts([H|T],All_case,Lens,Start_pos) :-    
+	%shifts([H|T],All_case,Lens),
+	Lens =\= 1,
+	New_Lens is Lens - 1,
+	one_shift([H|T],New_list),
+    add_case(All_case,New_list,New_case),
+	all_shifts(New_list,New_case,New_Lens,Start_pos).
 	
+	%writeq(All_case),!.
+	
+all_shifts([H|T],All_case,Lens,Start_pos) :-    
     one_shift([H|T],New_list),
 	all_shifts(New_list,All_case,Lens,Start_pos).
-
+	
+%%4.3 start_shifts.
+%% 
+start_shifts([H|T], What) :-
+    length([H|T],L),
+    all_shifts([H|T],What,L,H).
                                   
