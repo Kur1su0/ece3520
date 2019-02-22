@@ -170,32 +170,47 @@ all_cases(List, New_case) :-
 %%4.5 try_all_sqA
 try_all_sqA_helper(_,Lens):- Lens is 0,!,fail.
 try_all_sqA_helper([H|T],Lens) :-
-   
-    
-    %one_shift([H|T],New_list),
-	
     sqA(H,[]),true,
 	format("cyclic shift: ~q is a square~n",[H]),!;
 	Lens =\= 0,
 	New_Lens is Lens - 1,
 	one_shift([H|T],New_list),
-	
 	try_all_sqA_helper(New_list,New_Lens).
-	
-	
-	
 	
 	%%writeq(H).
 %try_all_sqA_helper([H|T],Lens,IsFind):-
 %     not(sqA(H,[])),
 %    format("false"),!.	
 try_all_sqA([H|T]) :-
-    %writeq([H|T]),
 	length([H|T],Lens),
-	%findall([H|T],(sqA([H|T],[]),false),List),
-	%length(X,L),
-	%writeq(List).
-    
 	try_all_sqA_helper([H|T],Lens).
 	
 
+%%4.6 try_all_rctA
+try_all_rctA_helper(_,Lens):- Lens is 0,!,fail.
+try_all_rctA_helper([H|T],Lens) :-
+    rctA(H,[]),true,
+	format("cyclic shift: ~q is a rectangle~n",[H]),!;
+	Lens =\= 0,
+	New_Lens is Lens - 1,
+	one_shift([H|T],New_list),
+	try_all_rctA_helper(New_list,New_Lens).
+	
+try_all_rctA([H|T]) :-
+	length([H|T],Lens),
+	try_all_rctA_helper([H|T],Lens).
+
+
+%%4.6 try_all_eqtriA
+try_all_eqtriA_helper(_,Lens):- Lens is 0,!,fail.
+try_all_eqtriA_helper([H|T],Lens) :-
+    eqtriA(H,[]),true,
+	format("cyclic shift: ~q is a rectangle~n",[H]),!;
+	Lens =\= 0,
+	New_Lens is Lens - 1,
+	one_shift([H|T],New_list),
+	try_all_eqtriA_helper(New_list,New_Lens).
+	
+try_all_eqtriA([H|T]) :-
+	length([H|T],Lens),
+	try_all_eqtriA_helper([H|T],Lens).
