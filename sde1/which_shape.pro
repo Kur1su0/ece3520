@@ -1,5 +1,6 @@
-
-%% Length of u. 
+% Zice Wei
+% ece3520 sde 1.
+%%3.1 Length of u. 
 %% string should be "u ..." otherwise false.
 uA(0) --> [].
 uA(Count) --> ["u"],uA(PrevCount),{Count is PrevCount+1}.
@@ -76,23 +77,9 @@ eqtriA --> uA(L),m30A(L),p240A(L).
 
 one_shift([Ori_H | Ori_T],New_list) :- 
 	append(Ori_T,[Ori_H],New_list).
-
-%one_shift([H|T],New):- concat(T,[H],New).
-%concat([],L,L).
-%concat([X1|L1],L2,[X1|L3]) :- concat(L1,L2,L3).
-%%add_case([],X,[X]).
-%%add_case([H|T],X,[H|L]) :- add_case(T,X,L).						   
+					   
 add_case(List1,List2,Cases):- append(List1,[List2],Cases).							   
 %%4.2 all_shifts/4
-%% shift all case for length-1. (length-1>0)
-
-%shifts(_,New_case,Lens):- Lens =:= 1,writeq(New_case),!.
-%shifts([H|T],All_case,Lens) :- 
-%	New_Lens is Lens - 1,
-%	one_shift([H|T],New_list),
-%	add_case(All_case,New_list,New_case),
-%	shifts(New_list,New_case,New_Lens),!.
-
 
 all_shifts([H|T],All_case,Lens,Start_pos) :-
         all_shifts1([H|T],All_case,Lens,Start_pos,1).			
@@ -128,41 +115,13 @@ start_shifts([H|T], What) :-
 		
 %%4.4 all_cases/2
 %% show all shift cases.
-all_case_helper(List, Cases, Lens) :- Lens =:= 0, writeq(Cases),!.
-all_case_helper(List, Cases, Lens) :-
-	Lens =\= 0,
-	New_Lens is Lens -1,
-	add_case(Cases,List,New_case),
-	one_shift(List,New_list),
-	all_case_helper(New_list,New_case,New_Lens).
-	
-
-check_same([],[],Res).
-		
-check_same([H1|T1],[H2|T2],Res) :- 
-    H1 =\= H2,
-	check_same(T1,T2,Res).
-check_same([H1|T1],[H2|T2],Res) :- 
-	H1 =:= H2,
-	New_Res is Res + 1,
-	check_same(T1,T2,Res).
-    
-	
-
 all_cases(List, New_case) :-
 	start_shifts(List,Cases),
 	nth0(0,New_case,List,Cases),!.
 	
 	
-	
-
-
-	%add_case(Cases,List,New_Lens),
-	%all_case_helper(List, New_case, Lens).
-
-	
 %%4.5 try_all_sqA
-try_all_sqA_helper(_,Lens):- Lens is 0,!,fail.
+
 try_all_sqA_helper([H|T],Lens) :-
     sqA(H,[]),true,
 	format("cyclic shift: ~q is a square~n",[H]),!;
@@ -170,15 +129,12 @@ try_all_sqA_helper([H|T],Lens) :-
 	New_Lens is Lens - 1,
 	one_shift([H|T],New_list),
 	try_all_sqA_helper(New_list,New_Lens).
-	
-	%%writeq(H).
-%try_all_sqA_helper([H|T],Lens,IsFind):-
-%     not(sqA(H,[])),
-%    format("false"),!.	
+try_all_sqA_helper(_,Lens):- Lens is 0,!,fail.
+
+		
 try_all_sqA([H|T]) :-
 	length([H|T],Lens),
 	try_all_sqA_helper([H|T],Lens).
-	
 
 %%4.6 try_all_rctA
 try_all_rctA_helper(_,Lens):- Lens is 0,!,fail.
@@ -192,6 +148,8 @@ try_all_rctA_helper([H|T],Lens) :-
 	
 try_all_rctA([H|T]) :-
 	length([H|T],Lens),
+	%findall([H|T],rctA([H|T],[]),List),
+	%writeq(List).
 	try_all_rctA_helper([H|T],Lens).
 
 
@@ -199,7 +157,7 @@ try_all_rctA([H|T]) :-
 try_all_eqtriA_helper(_,Lens):- Lens is 0,!,fail.
 try_all_eqtriA_helper([H|T],Lens) :-
     eqtriA(H,[]),true,
-	format("cyclic shift: ~q is a rectangle~n",[H]),!;
+	format("cyclic shift: ~q is an equilateral triangle~n",[H]),!;
 	Lens =\= 0,
 	New_Lens is Lens - 1,
 	one_shift([H|T],New_list),
