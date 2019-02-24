@@ -13,8 +13,6 @@ test(all_cases) :-
     all_cases(["u","r","d","l"],What1),
 	all_cases([1,2,3,4],What2).
 
-test(all_shifts) :-
-    all_shifts([1,2,3,4],What,4,5).
 
 :- end_tests(which_shape).
 :- run_tests.
