@@ -50,6 +50,8 @@ rctA --> uA(W),rA(H),dA(W),lA(H).
 %%3.6 grect/3
 %% generate a rectangle.
 grect(HEIGHT,WIDTH,What) :-
+    HEIGHT >= 1,
+	WIDTH >= 1,
 	uA(HEIGHT,U,[]),
 	rA(WIDTH,R,[]),
 	lA(WIDTH,L,[]),

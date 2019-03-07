@@ -16,6 +16,11 @@ test(all_cases) :-
 test(all_shifts) :-
     all_shifts([1,2,3,4],What,4,5).
 
+test(grect) :-
+    grect(1,2,What1),
+	nl,writeq(What1),
+	writeq(What1).
+
 :- end_tests(which_shape).
 :- run_tests.
-:- halt.
+
