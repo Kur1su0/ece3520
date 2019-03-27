@@ -1,0 +1,54 @@
+(* which_shape.caml *)
+
+open List;;
+
+(* 3.1 *)
+let rec gen_string (len,what) = 
+    if len = 0 then []
+    else what::gen_string ((len-1),what);;
+
+(* 3.2 *)
+let gen_square(len) = 
+    gen_string(len,"u")@
+    gen_string(len,"r")@
+    gen_string(len,"d")@
+    gen_string(len,"l");;
+
+(* 3.3 *)
+let rec gen_rect(n,m) = 
+    gen_string(n,"u")@
+    gen_string(m,"r")@
+    gen_string(n,"d")@
+    gen_string(m,"l");;
+
+(* 3.4 *)
+let rec countups(list,counter)=
+    if List.length list = 0 then counter
+    else 
+        if List.nth list 0 = "u" then countups(List.tl list,counter+1)
+        
+        else countups(List.tl list,counter);;
+
+(* 3.5 *)
+let rec consec_counts(list,counter,what)=
+    if List.length list = 0 then list,counter
+    else 
+        if List.nth list 0 = what then consec_counts(List.tl list,counter+1,what)
+        
+        else list,counter;;
+
+(* 4.1 *)
+(*
+let sq_helper(list,l1,l2,l3,l4) =
+    consec_counts(list,l1,"u")
+    consec_counts(list,l2,"r")
+    consec_counts(list,l3,"d")
+    consec_counts(list,l4,"l")
+    if l1 > 0 and l2 > 0
+        
+
+let sq(list) = 
+    sq_helper(list,0,0,0,0);;
+    
+*)
+
