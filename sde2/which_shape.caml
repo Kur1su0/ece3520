@@ -38,16 +38,41 @@ let rec consec_counts(list,counter,what)=
         else list,counter;;
 
 (* 4.1 *)
-let rec sq_helper(list,l1,l2,l3,l4) =
-   if List.nth 0 list = 'u' then consec_counts(list,l1,"u")
-   else if List nth 0 list = 'r' && l1 >0 then consec_counts(list,l2,'r')
-   else if list <> [] then
-    consec_counts(list,l1,"u");;
-    (*if l1 = 0  then true
-    else false;;
-       *) 
+(*
+let rec sq_helper(list,l1,l2,l3,l4) = 
+   if (l1>0 && l2 >0 && l3>0 && l4 >0) then 
+          true
+   else if (List.nth list 0 = "u" && l1 = 0) then
+          count_helper(list, 0,"u")
 
+
+and count_helper(list, lens, what) = 
+   consec_counts(list,lens,what),
+   if (lens > 0) then true;;
 let sq(list) = 
     sq_helper(list,0,0,0,0);;
-    
 
+ *)
+
+
+
+(* 4.5 *)
+let one_shift (list) =
+    match list with
+    | []  -> []
+    | hd::tl -> (tl) @ [hd];;
+
+(* 4.6 *)
+let rec all_shifts_helper(list, lens)=
+    match lens with
+    | 1 -> []
+    | _ -> one_shift(list)::all_shifts_helper(one_shift(list),lens-1);;
+
+let all_shifts(list) =
+    all_shifts_helper(list,List.length list);;
+
+(* 4.7 *)
+let all_cases(list) =
+    list::all_shifts(list);;
+(* 4.8 *)
+(* 4.9 *)
