@@ -1,0 +1,4 @@
+open List;;
+let rec comfortably = fun nu mb ->
+if (nu = [] && mb = []) then []
+    else ((List.hd nu)-.(List.hd mb))::comfortably(List.tl nu)(List.tl mb);;

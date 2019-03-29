@@ -1,0 +1,23 @@
+open List;;
+let rec tdr = function (input1, input2) ->
+    if input1==[] && input2==[] then []
+    else (List.hd(input2) * List.hd(input1) )::
+    tdr(List.tl(input1),List.tl(input2));;
+
+let rec td = function(input1,input2) ->
+    if input1 == [] && input2 ==[] then []
+    else tdr(List.hd(input1) ,List.hd( input2))::
+    td(List.tl(input1),List.tl(input2));;
+
+    let in1 = [
+    [0;0;0;8];
+    [0;0;0;7];
+    [5;4;3;2]
+    ];;
+
+    let in2 = [
+    [0;8;0;0];
+    [0;7;0;0];
+    [5;4;3;2]
+    ]
+    let quiz_comp= td(in1,in2);;

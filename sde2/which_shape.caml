@@ -38,17 +38,16 @@ let rec consec_counts(list,counter,what)=
         else list,counter;;
 
 (* 4.1 *)
-(*
-let sq_helper(list,l1,l2,l3,l4) =
-    consec_counts(list,l1,"u")
-    consec_counts(list,l2,"r")
-    consec_counts(list,l3,"d")
-    consec_counts(list,l4,"l")
-    if l1 > 0 and l2 > 0
-        
+let rec sq_helper(list,l1,l2,l3,l4) =
+   if List.nth 0 list = 'u' then consec_counts(list,l1,"u")
+   else if List nth 0 list = 'r' && l1 >0 then consec_counts(list,l2,'r')
+   else if list <> [] then
+    consec_counts(list,l1,"u");;
+    (*if l1 = 0  then true
+    else false;;
+       *) 
 
 let sq(list) = 
     sq_helper(list,0,0,0,0);;
     
-*)
 
