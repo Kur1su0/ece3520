@@ -151,5 +151,29 @@ let all_shifts(list) =
 (* 4.7 *)
 let all_cases(list) =
     list::all_shifts(list);;
-(* 4.8 *)
+
+(*4.8 *)
+
+let rec try_all_sqA_helper(list) = 
+    if list = [] then false
+    else if sqA(List.hd list) = true then true
+    else try_all_sqA_helper(List.tl list);;
+
+
+
+let try_all_sqA(list)=
+    if list = [] then false
+    else try_all_sqA_helper(all_cases(list));;
+
+
 (* 4.9 *)
+
+let rec try_all_tri_helper(list) = 
+    if list = [] then false
+    else if eqtriA(List.hd list) = true then true
+    else try_all_tri_helper(List.tl list);;
+
+let try_all_eqtriA(list) = 
+    if list = [] then false
+    else try_all_tri_helper(all_cases(list));;
+    
