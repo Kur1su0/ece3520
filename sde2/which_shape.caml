@@ -108,6 +108,29 @@ let sqA(list) =
     sqA_helper(list,0,["u";"r";"d";"l"],[]);;
 
 (* 4.4*)
+let rec eqtriA_helper(list,l1,list2,lens_list) = 
+    if list=[] && list2<>[] then false
+    else if list<>[] && list2=[] then false
+    else if list2 = [] &&
+           List.length lens_list = 3 then
+           if
+               List.nth lens_list 0 = List.nth lens_list 1 &&
+               List.nth lens_list 1 = List.nth lens_list 2 
+               then true
+           else false
+
+    else if List.nth list 0 <> List.nth list2 0 then false
+   
+   else
+    eqtriA_count_helper(consec_counts(list, l1,List.nth list2 0),l1,list2,lens_list)
+
+
+and eqtriA_count_helper((list,what),l1,list2,lens_list) = 
+    (*Printf.printf "%d\n" what ;*)
+    eqtriA_helper(list,l1,tl list2, what::lens_list);; 
+
+let eqtriA(list) =
+    eqtriA_helper(list,0,["u";"m30";"p240"],[]);;
 
 
 (* 4.5 *)
