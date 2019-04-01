@@ -39,25 +39,75 @@ let rec consec_counts(list,counter,what)=
 
 (* 4.1 *)
 let rec sq_helper(list,l1,list2,lens_list) = 
-   if List.length list2 = 0 then true
+   if list=[] && list2<>[] then false
+   else if List.length list2 = 0 then true
    else if List.nth list 0 <> List.nth list2 0 then false
    else
     count_helper(consec_counts(list, l1,List.nth list2 0),l1,list2,lens_list)
 
 
 and count_helper((list,what),l1,list2,lens_list) = 
-    Printf.printf "%d\n" what ;
-    if List.length lens_list = 4 &&
+   (* Printf.printf "%d\n" what ; *)
+    if list2 = [] then true
+    (*   List.length lens_list = 4 &&
        List.nth lens_list 0 >0 &&
        List.nth lens_list 1 >0 &&
        List.nth lens_list 2 >0 &&
        List.nth lens_list 3 >0 
-       then true
+       then true  *)
     else 
     sq_helper(list,l1,tl list2, what::lens_list);; 
 
 let sq(list) = 
     sq_helper(list,0,["u";"r";"d";"l"],[]);;
+
+(* 4.2 *)
+let rec sq_all_helper(list,l1,list2,lens_list) = 
+    if list=[] && list2<>[] then false
+    else if list<>[] && list2=[] then false
+
+    else if List.nth list 0 <> List.nth list2 0 then false
+   
+   else
+    sq_all_count_helper(consec_counts(list, l1,List.nth list2 0),l1,list2,lens_list)
+
+
+and sq_all_count_helper((list,what),l1,list2,lens_list) = 
+    (*Printf.printf "%d\n" what ;*)
+    if list2 = [] then true
+    else
+    sq_all_helper(list,l1,tl list2, what::lens_list);; 
+
+let sq_all(list) =
+    sq_all_helper(list,0,["u";"r";"d";"l"],[]);;
+
+(* 4.3*)
+let rec sqA_helper(list,l1,list2,lens_list) = 
+    if list=[] && list2<>[] then false
+    else if list<>[] && list2=[] then false
+    else if list2 = [] &&
+           List.length lens_list = 4 then
+           if
+               List.nth lens_list 0 = List.nth lens_list 1 &&
+               List.nth lens_list 1 = List.nth lens_list 2 &&
+               List.nth lens_list 2 = List.nth lens_list 3 
+               then true
+           else false
+
+    else if List.nth list 0 <> List.nth list2 0 then false
+   
+   else
+    sqA_count_helper(consec_counts(list, l1,List.nth list2 0),l1,list2,lens_list)
+
+
+and sqA_count_helper((list,what),l1,list2,lens_list) = 
+    (*Printf.printf "%d\n" what ;*)
+    sqA_helper(list,l1,tl list2, what::lens_list);; 
+
+let sqA(list) =
+    sqA_helper(list,0,["u";"r";"d";"l"],[]);;
+
+(* 4.4*)
 
 
 (* 4.5 *)
