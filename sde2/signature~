@@ -8,7 +8,7 @@ val count_helper : ('a list * int) * int * 'a list * int list -> bool = <fun>
 val sq : string list -> bool = <fun>
 val sq_all_helper : 'a list * int * 'a list * int list -> bool = <fun>
 val sq_all_count_helper : ('a list * int) * int * 'a list * int list -> bool = <fun>
-val sq_all : string list -> bool = <fun>
+val sq_all : string list -> bool = <fun> 
 val sqA_helper : 'a list * int * 'a list * int list -> bool = <fun>
 val sqA_count_helper : ('a list * int) * int * 'a list * int list -> bool = <fun>
 val sqA : string list -> bool = <fun>
@@ -23,3 +23,4 @@ val try_all_sqA_helper : string list list -> bool = <fun>
 val try_all_sqA : string list -> bool = <fun>
 val try_all_tri_helper : string list list -> bool = <fun>
 val try_all_eqtriA : string list -> bool = <fun>
+
