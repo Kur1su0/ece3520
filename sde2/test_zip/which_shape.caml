@@ -1,0 +1,178 @@
+(* Zice Wei - sde2 *)
+(* which_shape.caml *)
+
+open List;;
+
+(* 3.1 *)
+let rec gen_string (len,what) = 
+    if len = 0 then []
+    else what::gen_string ((len-1),what);;
+
+(* 3.2 *)
+let gen_square(len) = 
+    gen_string(len,"u")@
+    gen_string(len,"r")@
+    gen_string(len,"d")@
+    gen_string(len,"l");;
+
+(* 3.3 *)
+let rec gen_rect(n,m) = 
+    gen_string(n,"u")@
+    gen_string(m,"r")@
+    gen_string(n,"d")@
+    gen_string(m,"l");;
+
+(* 3.4 *)
+let rec countups(list,counter)=
+    if List.length list = 0 then counter
+    else 
+        if List.nth list 0 = "u" then countups(List.tl list,counter+1)
+        
+        else countups(List.tl list,counter);;
+
+(* 3.5 *)
+let rec consec_counts(list,counter,what)=
+    if List.length list = 0 then list,counter
+    else 
+        if List.nth list 0 = what then consec_counts(List.tl list,counter+1,what)
+        
+        else list,counter;;
+
+(* 4.1 *)
+let rec sq_helper(list,l1,list2,lens_list) = 
+   if list=[] && list2<>[] then false
+   else if List.length list2 = 0 then true
+   else if List.nth list 0 <> List.nth list2 0 then false
+   else
+    count_helper(consec_counts(list, l1,List.nth list2 0),l1,list2,lens_list)
+
+
+and count_helper((list,what),l1,list2,lens_list) = 
+   (* Printf.printf "%d\n" what ; *)
+    if list2 = [] then true
+    else 
+    sq_helper(list,l1,tl list2, what::lens_list);; 
+
+let sq(list) = 
+    sq_helper(list,0,["u";"r";"d";"l"],[]);;
+
+(* 4.2 *)
+let rec sq_all_helper(list,l1,list2,lens_list) = 
+    if list=[] && list2<>[] then false
+    else if list<>[] && list2=[] then false
+    else if list2 = [] then true
+    else if List.nth list 0 <> List.nth list2 0 then false
+   
+   else
+    sq_all_count_helper(consec_counts(list, l1,List.nth list2 0),l1,list2,lens_list)
+
+
+and sq_all_count_helper((list,what),l1,list2,lens_list) = 
+    (*Printf.printf "%d\n" what ;*)
+    if list2 = [] then true
+    else
+    sq_all_helper(list,l1,tl list2, what::lens_list);; 
+
+let sq_all(list) =
+    sq_all_helper(list,0,["u";"r";"d";"l"],[]);;
+
+(* 4.3*)
+let rec sqA_helper(list,l1,list2,lens_list) = 
+    if list=[] && list2<>[] then false
+    else if list<>[] && list2=[] then false
+    else if list2 = [] &&
+           List.length lens_list = 4 then
+           if
+               List.nth lens_list 0 = List.nth lens_list 1 &&
+               List.nth lens_list 1 = List.nth lens_list 2 &&
+               List.nth lens_list 2 = List.nth lens_list 3 
+               then true
+           else false
+
+    else if List.nth list 0 <> List.nth list2 0 then false
+   
+   else
+    sqA_count_helper(consec_counts(list, l1,List.nth list2 0),l1,list2,lens_list)
+
+
+and sqA_count_helper((list,what),l1,list2,lens_list) = 
+    (*Printf.printf "%d\n" what ;*)
+    sqA_helper(list,l1,tl list2, what::lens_list);; 
+
+let sqA(list) =
+    sqA_helper(list,0,["u";"r";"d";"l"],[]);;
+
+(* 4.4*)
+let rec eqtriA_helper(list,l1,list2,lens_list) = 
+    if list=[] && list2<>[] then false
+    else if list<>[] && list2=[] then false
+    else if list2 = [] &&
+           List.length lens_list = 3 then
+           if
+               List.nth lens_list 0 = List.nth lens_list 1 &&
+               List.nth lens_list 1 = List.nth lens_list 2 
+               then true
+           else false
+
+    else if List.nth list 0 <> List.nth list2 0 then false
+   
+   else
+    eqtriA_count_helper(consec_counts(list, l1,List.nth list2 0),l1,list2,lens_list)
+
+
+and eqtriA_count_helper((list,what),l1,list2,lens_list) = 
+    (*Printf.printf "%d\n" what ;*)
+    eqtriA_helper(list,l1,tl list2, what::lens_list);; 
+
+let eqtriA(list) =
+    eqtriA_helper(list,0,["u";"m30";"p240"],[]);;
+
+
+(* 4.5 *)
+let one_shift (list) =
+    if List.length list = 1 then []
+    else 
+    match list with
+    | [] -> []
+    | hd::tl -> (tl) @ [hd];;
+
+(* 4.6 *)
+let rec all_shifts_helper(list, lens)=
+    match lens with
+    | 1 -> []
+    | _ -> one_shift(list)::all_shifts_helper(one_shift(list),lens-1);;
+
+let all_shifts(list) =
+    if list = [] then []
+    else
+    all_shifts_helper(list,List.length list);;
+
+(* 4.7 *)
+let all_cases(list) =
+    list::all_shifts(list);;
+
+(*4.8 *)
+
+let rec try_all_sqA_helper(list) = 
+    if list = [] then false
+    else if sqA(List.hd list) = true then true
+    else try_all_sqA_helper(List.tl list);;
+
+
+
+let try_all_sqA(list)=
+    if list = [] then false
+    else try_all_sqA_helper(all_cases(list));;
+
+
+(* 4.9 *)
+
+let rec try_all_tri_helper(list) = 
+    if list = [] then false
+    else if eqtriA(List.hd list) = true then true
+    else try_all_tri_helper(List.tl list);;
+
+let try_all_eqtriA(list) = 
+    if list = [] then false
+    else try_all_tri_helper(all_cases(list));;
+    
