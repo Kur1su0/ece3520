@@ -143,6 +143,8 @@ let rec all_shifts_helper(list, lens)=
     | _ -> one_shift(list)::all_shifts_helper(one_shift(list),lens-1);;
 
 let all_shifts(list) =
+    if list = [] then []
+    else
     all_shifts_helper(list,List.length list);;
 
 (* 4.7 *)
