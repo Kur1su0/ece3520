@@ -1,0 +1,14 @@
+val gen_string : int * ’a -> ’a list = <fun>
+val gen_square : int -> string list = <fun>
+val gen_rect : int * int -> string list = <fun>
+val countups : string list * int -> int = <fun>
+val consec_counts : ’a list * int * ’a -> ’a list * int = <fun>
+val sq : ’a list -> bool = <fun>
+val sq_all : ’a list -> bool = <fun>
+val sqA : string list -> bool = <fun>
+val eqtriA : string list -> bool = <fun>
+val one_shift : ’a list -> ’a list = <fun>
+val all_shifts : ’a list -> ’a list list = <fun>
+val all_cases : ’a list -> ’a list list = <fun>
+val try_all_sqA : string list -> bool = <fun>
+val try_all_eqtriA : string list -> bool = <fun>

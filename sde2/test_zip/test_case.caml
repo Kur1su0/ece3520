@@ -1,0 +1,45 @@
+#use "which_shape.caml";;
+
+print_string "\n\ngen_string(6,1);;";;
+gen_string(6,1);;
+print_string "\n gen_string(6,\"a\");;";;
+gen_string(6,"a");;
+
+gen_square(3);;
+gen_square(1);;
+
+gen_rect(1,2);;
+gen_rect(1,4);;
+
+countups(["u";"m30";"u"],0);;
+countups(["a";"m30";"a"],0);;
+
+consec_counts(["a";"a";"b";"b";"a"],0,"a");;
+consec_counts(["a";"a";"b";"b";"a"],0,"b");;
+
+sq(["u";"r";"r";"d";"l";"u";"d"]);;
+sq(["u";"r";"r";"l";]);;           
+
+sq_all(["u";"u";"r";"r";"d";"l";"u"]);;
+sq_all(["u";"u";"r";"r";"d";"l"]);;
+
+sqA(["u";"r";"d";"l"]);;
+sqA(["u";"u";"r";"r";"d";"d";"l";"x"]);;
+
+eqtriA(["u";"u";"m30";"m30";"p240";"p240"]);;
+eqtriA(["u";"u";"m30";"m30";"p240"]);;       
+
+one_shift([1;2;3;4]);;            
+one_shift(["u";"r";"d";"l"]);;    
+
+all_shifts(["u";"r";"d";"l"]);;
+all_shifts(["1";"2";"3";"4"]);;
+
+all_cases([1;2;3;4]);;
+all_cases(["u";"r";"d";"l"]);; 
+
+try_all_sqA(["u";"r";"d";"l"]);;
+try_all_sqA(["r";"d";"l";"u"]);;
+
+try_all_eqtriA(["u";"m30";"m30";"p240";"p240";"u"]);;    
+try_all_eqtriA(["p240";"m30";"u"]);;                     
