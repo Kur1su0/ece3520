@@ -1,8 +1,8 @@
-int yyerror (s)
+int yyerror(s) 
     char *s;
     {
     
-    printf("%s\n",s);
+    printf("BIG ERROR! %s\n",s);
     return(-1);
 
     }
