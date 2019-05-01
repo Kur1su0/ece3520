@@ -1,7 +1,7 @@
 ### Usage
-##### make & clean
+- ##### make & clean
 - **make**: sh run.sh make
 - **clean**: sh run.sh clean
 
-##### run
+- ##### run
 - echo "your-input" | ./test
