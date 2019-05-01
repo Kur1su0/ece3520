@@ -1,0 +1,11 @@
+%{
+#include "abcde.tab.h"
+YYSTYPE yylval;
+%}
+%%
+a return A;
+b return B;
+c return C;
+d return D;
+e return E;
+%%
